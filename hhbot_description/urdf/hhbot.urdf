@@ -110,7 +110,7 @@
     <link name="tail">  
         <visual>  
             <geometry>  
-                <box size="0.1 0.03 0.03"/>  
+                <box size="0.1 0.02 0.02"/>  
             </geometry>  
             <material name="red">  
                 <color rgba="1 0 0 1"/>  
