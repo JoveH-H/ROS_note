@@ -87,10 +87,6 @@
                                       h="${wheel_length}" />
         </link>
 
-        <gazebo reference="${lr}_${fb}_wheel_link">
-            <material>Gazebo/Black</material>
-        </gazebo>
-
         <xacro:property name="sign_fb" value="-1.0" />
         <xacro:if value="${fb == 'front'}">
 	        <xacro:property name="sign_fb" value="1.0" />
@@ -171,9 +167,6 @@
                                   h="${base_link_height}" 	
                                   d="${base_link_length}" />
         </link>
-        <gazebo reference="base_link">
-            <material>Gazebo/White</material>
-        </gazebo>
 
         <!-- Wheel Definitions -->
         <wheel lr="left"  fb="front" />
@@ -184,29 +177,5 @@
         <!-- Tail Definitions -->
         <tail/>
 
-        <!-- controller -->
-        <gazebo>
-            <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-                <rosDebugLevel>Debug</rosDebugLevel>
-                <publishWheelTF>true</publishWheelTF>
-                <robotNamespace>/</robotNamespace>
-                <publishTf>1</publishTf>
-                <publishWheelJointState>true</publishWheelJointState>
-                <alwaysOn>true</alwaysOn>
-                <updateRate>100.0</updateRate>
-                <legacyMode>true</legacyMode>
-                <leftJoint>left_back_wheel_joint</leftJoint>
-                <rightJoint>right_back_wheel_joint</rightJoint>
-                <wheelSeparation>${base_link_width}</wheelSeparation>
-                <wheelDiameter>${2*wheel_radius}</wheelDiameter>
-                <broadcastTF>1</broadcastTF>
-                <wheelTorque>28</wheelTorque>
-                <wheelAcceleration>1.8</wheelAcceleration>
-                <commandTopic>cmd_vel</commandTopic>
-                <odometryFrame>odom</odometryFrame> 
-                <odometryTopic>odom</odometryTopic> 
-                <robotBaseFrame>base_footprint</robotBaseFrame>
-            </plugin>
-        </gazebo> 
     </xacro:macro>
 </robot>
