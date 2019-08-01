@@ -7,14 +7,14 @@ node [shape=box];
 "right_front_wheel" [label="right_front_wheel"];
 "tail" [label="tail"];
 node [shape=ellipse, color=blue, fontcolor=blue];
-"base_link" -> "left_back_wheel_joint" [label="xyz: -0.07 -0.1 -0.02 \nrpy: 0 1.5708 -0"]
+"base_link" -> "left_back_wheel_joint" [label="xyz: -0.1 -0.07 -0.02 \nrpy: 1.57075 -0 0"]
 "left_back_wheel_joint" -> "left_back_wheel"
-"base_link" -> "left_front_wheel_joint" [label="xyz: -0.07 0.1 -0.02 \nrpy: 0 1.5708 -0"]
+"base_link" -> "left_front_wheel_joint" [label="xyz: 0.1 -0.07 -0.02 \nrpy: 1.57075 -0 0"]
 "left_front_wheel_joint" -> "left_front_wheel"
-"base_link" -> "right_back_wheel_joint" [label="xyz: 0.07 -0.1 -0.02 \nrpy: 0 1.5708 -0"]
+"base_link" -> "right_back_wheel_joint" [label="xyz: -0.1 0.07 -0.02 \nrpy: 1.57075 -0 0"]
 "right_back_wheel_joint" -> "right_back_wheel"
-"base_link" -> "right_front_wheel_joint" [label="xyz: 0.07 0.1 -0.02 \nrpy: 0 1.5708 -0"]
+"base_link" -> "right_front_wheel_joint" [label="xyz: 0.1 0.07 -0.02 \nrpy: 1.57075 -0 0"]
 "right_front_wheel_joint" -> "right_front_wheel"
-"base_link" -> "tail_joint" [label="xyz: 0 -0.09 0.023 \nrpy: 1.0472 -0 0"]
+"base_link" -> "tail_joint" [label="xyz: -0.09 0 0.023 \nrpy: 0 -1.0472 0"]
 "tail_joint" -> "tail"
 }

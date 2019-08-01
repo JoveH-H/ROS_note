@@ -31,11 +31,11 @@
     <xacro:property name="wheel_centre" value="0.005" />
 
     <!-- tail length, width, height, y and radian -->
-    <xacro:property name="tail_length" value="0.02" /> 
-    <xacro:property name="tail_width"  value="0.1" />
+    <xacro:property name="tail_width"  value="0.02" />
+    <xacro:property name="tail_length" value="0.1" /> 
     <xacro:property name="tail_height" value="0.02" />
-    <xacro:property name="tail_y"      value="-0.09" />
-    <xacro:property name="tail_radian" value="1.0472" />
+    <xacro:property name="tail_x"      value="-0.09" />
+    <xacro:property name="tail_radian" value="-1.0472" />
     
     <!-- Macro for inertia matrix -->
     <xacro:macro name="sphere_inertial_matrix" params="m r">
@@ -101,10 +101,10 @@
             <axis xyz="0 0 1" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="${lr}_${fb}_wheel_link" />
-            <origin xyz="${sign_lr*base_link_width/2}
-                         ${sign_fb*(base_link_length/2-wheel_radius)}
+            <origin xyz="${sign_fb*(base_link_length/2-wheel_radius)}
+                         ${sign_lr*base_link_width/2}
                          ${wheel_centre-wheel_radius}" 
-                    rpy="0 ${H_PI/2} 0" /> 
+                    rpy="${H_PI/2} 0 0" /> 
         </joint>
     </xacro:macro>
 
@@ -122,7 +122,7 @@
         <joint name="tail_joint" type="fixed">  
             <parent link="base_link"/>  
             <child link="tail_link"/>  
-            <origin rpy="${tail_radian} 0 0" xyz="0 ${tail_y} ${base_link_height/2-0.002}"/>  
+            <origin rpy="0 ${tail_radian} 0" xyz="${tail_x} 0 ${base_link_height/2-0.002}"/>  
         </joint> 
     </xacro:macro>
 
@@ -131,7 +131,7 @@
     <xacro:macro name="hhbot_body">
         <link name="base_footprint">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 ${-H_PI/2} " />
+                <origin xyz="0 0 0" rpy="0 0 0 " />
                 <geometry>
                     <box size="0.001 0.001 0.001" />
                 </geometry>
@@ -139,7 +139,7 @@
         </link>
 
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 ${-H_PI/2}" />
+            <origin xyz="0 0 ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 0" />
             <parent link="base_footprint"/>
             <child link="base_link" />
         </joint>
@@ -148,7 +148,7 @@
         <!--Actual body/chassis of the robot-->
         <link name="base_link">
             <visual>
-                <origin xyz=" 0 0 0" rpy="0 0 ${H_PI/2}" />
+                <origin xyz=" 0 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="${base_link_length} ${base_link_width} ${base_link_height}" />
                 </geometry>
@@ -156,7 +156,7 @@
             </visual>
 
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 ${H_PI/2}" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="${base_link_length} ${base_link_width} ${base_link_height}" />
                 </geometry>
