@@ -19,7 +19,7 @@
     <xacro:property name="H_PI" value="3.1415926535897931" />
 
     <!-- Main body length, width, height and mass -->
-    <xacro:property name="base_mass"        value="3" /> 
+    <xacro:property name="base_mass"        value="1" /> 
     <xacro:property name="base_link_length" value="0.25" />
     <xacro:property name="base_link_width"  value="0.14" />
     <xacro:property name="base_link_height" value="0.05"/>
@@ -31,11 +31,11 @@
     <xacro:property name="wheel_centre" value="0.005" />
 
     <!-- tail length, width, height, y and radian -->
-    <xacro:property name="tail_length" value="0.02" /> 
-    <xacro:property name="tail_width"  value="0.1" />
+    <xacro:property name="tail_width"  value="0.02" />
+    <xacro:property name="tail_length" value="0.1" /> 
     <xacro:property name="tail_height" value="0.02" />
-    <xacro:property name="tail_y"      value="-0.09" />
-    <xacro:property name="tail_radian" value="1.0472" />
+    <xacro:property name="tail_x"      value="-0.09" />
+    <xacro:property name="tail_radian" value="-1.0472" />
     
     <!-- Macro for inertia matrix -->
     <xacro:macro name="sphere_inertial_matrix" params="m r">
@@ -76,7 +76,7 @@
                 </geometry>
                 <material name="Black" />
             </visual>
-            <collision>
+            <collision>   
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <cylinder length="${wheel_length}" radius="${wheel_radius}" />
@@ -96,32 +96,31 @@
 	        <xacro:property name="sign_fb" value="1.0" />
         </xacro:if>
 
-        <xacro:property name="sign_lr" value="1.0" />
+        <xacro:property name="sign_lr" value="-1.0" />
         <xacro:if value="${lr == 'left'}">
-	        <xacro:property name="sign_lr" value="-1.0" />
+	        <xacro:property name="sign_lr" value="1.0" />
         </xacro:if>
+
 
         <joint name="${lr}_${fb}_wheel_joint" type="continuous">
             <axis xyz="0 0 1" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="${lr}_${fb}_wheel_link" />
-            <origin xyz="${sign_lr*base_link_width/2}
-                         ${sign_fb*(base_link_length/2-wheel_radius)}
+            <origin xyz="${sign_fb*(base_link_length/2-wheel_radius)}
+                         ${sign_lr*base_link_width/2}
                          ${wheel_centre-wheel_radius}" 
-                    rpy="0 ${H_PI/2} 0" /> 
+                    rpy="${-H_PI/2} 0 0" /> 
         </joint>
 
         <!-- Transmission is important to link the joints and the controller -->
-        <xacro:if value="${fb == 'back'}">
-            <transmission name="${lr}_wheel_joint_trans">
-                <type>transmission_interface/SimpleTransmission</type>
-                <joint name="${lr}_${fb}_wheel_joint" />
-                <actuator name="${lr}_wheel_joint_motor">
-                    <hardwareInterface>VelocityJointInterface</hardwareInterface>
-                    <mechanicalReduction>1</mechanicalReduction>
-                </actuator>
-            </transmission>
-        </xacro:if>
+        <transmission name="wheel_${lr}_joint_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${lr}_${fb}_wheel_joint" />
+            <actuator name="wheel_${lr}_joint_motor">
+                <hardwareInterface>VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
     </xacro:macro>
 
     <!-- Macro for tail -->
@@ -138,9 +137,8 @@
         <joint name="tail_joint" type="fixed">  
             <parent link="base_link"/>  
             <child link="tail_link"/>  
-            <origin rpy="${tail_radian} 0 0" xyz="0 ${tail_y} ${base_link_height/2-0.002}"/>  
+            <origin rpy="0 ${tail_radian} 0" xyz="${tail_x} 0 ${base_link_height/2-0.002}"/>  
         </joint> 
-
         <gazebo reference="tail_link">
             <material>Gazebo/Red</material>
         </gazebo>
@@ -151,7 +149,7 @@
     <xacro:macro name="hhbot_body">
         <link name="base_footprint">
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 ${-H_PI/2} " />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="0.001 0.001 0.001" />
                 </geometry>
@@ -159,7 +157,9 @@
         </link>
 
         <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 ${-H_PI/2}" />
+            <origin xyz="${base_link_length/2-wheel_radius} 
+                         0
+                         ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 0" />
             <parent link="base_footprint"/>
             <child link="base_link" />
         </joint>
@@ -168,7 +168,7 @@
         <!--Actual body/chassis of the robot-->
         <link name="base_link">
             <visual>
-                <origin xyz=" 0 0 0" rpy="0 0 ${H_PI/2}" />
+                <origin xyz=" 0 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="${base_link_length} ${base_link_width} ${base_link_height}" />
                 </geometry>
@@ -176,7 +176,7 @@
             </visual>
 
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 ${H_PI/2}" />
+                <origin xyz="0 0 0" rpy="0 0 0" />
                 <geometry>
                     <box size="${base_link_length} ${base_link_width} ${base_link_height}" />
                 </geometry>
@@ -201,29 +201,24 @@
         <tail/>
 
         <!-- controller -->
-        <gazebo>
-            <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-                <rosDebugLevel>Debug</rosDebugLevel>
-                <publishWheelTF>true</publishWheelTF>
-                <robotNamespace>/</robotNamespace>
-                <publishTf>1</publishTf>
-                <publishWheelJointState>true</publishWheelJointState>
-                <alwaysOn>true</alwaysOn>
-                <updateRate>100.0</updateRate>
-                <legacyMode>true</legacyMode>
-                <leftJoint>left_back_wheel_joint</leftJoint>
-                <rightJoint>right_back_wheel_joint</rightJoint>
-                <wheelSeparation>${base_link_width}</wheelSeparation>
-                <wheelDiameter>${2*wheel_radius}</wheelDiameter>
-                <broadcastTF>1</broadcastTF>
-                <wheelTorque>28</wheelTorque>
-                <wheelAcceleration>1.8</wheelAcceleration>
-                <commandTopic>cmd_vel</commandTopic>
-                <odometryFrame>odom</odometryFrame> 
-                <odometryTopic>odom</odometryTopic> 
-                <robotBaseFrame>base_footprint</robotBaseFrame>
-            </plugin>
-        </gazebo> 
+	<gazebo>
+	 <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+	    <alwaysOn>true</alwaysOn>
+	    <updateRate>50.0</updateRate>
+	    <leftFrontJoint>left_front_wheel_joint</leftFrontJoint>
+	    <rightFrontJoint>right_front_wheel_joint</rightFrontJoint>
+	    <leftRearJoint>left_back_wheel_joint</leftRearJoint>
+	    <rightRearJoint>right_back_wheel_joint</rightRearJoint> 
+	    <wheelSeparation>${base_link_width}</wheelSeparation> 
+	    <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+	    <torque>28</torque>
+	    <commandTopic>cmd_vel</commandTopic>
+	    <odometryTopic>odom</odometryTopic>
+	    <odometryFrame>odom</odometryFrame>
+	    <robotBaseFrame>base_footprint</robotBaseFrame>
+	    <broadcastTF>1</broadcastTF>
+	  </plugin>
+	</gazebo>
     </xacro:macro>
 
 </robot>

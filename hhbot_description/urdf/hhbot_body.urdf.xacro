@@ -19,7 +19,7 @@
     <xacro:property name="H_PI" value="3.1415926535897931" />
 
     <!-- Main body length, width, height and mass -->
-    <xacro:property name="base_mass"        value="3" /> 
+    <xacro:property name="base_mass"        value="0.3" /> 
     <xacro:property name="base_link_length" value="0.25" />
     <xacro:property name="base_link_width"  value="0.14" />
     <xacro:property name="base_link_height" value="0.05"/>
@@ -92,19 +92,19 @@
 	        <xacro:property name="sign_fb" value="1.0" />
         </xacro:if>
 
-        <xacro:property name="sign_lr" value="1.0" />
+        <xacro:property name="sign_lr" value="-1.0" />
         <xacro:if value="${lr == 'left'}">
-	        <xacro:property name="sign_lr" value="-1.0" />
+	        <xacro:property name="sign_lr" value="1.0" />
         </xacro:if>
 
         <joint name="${lr}_${fb}_wheel_joint" type="continuous">
-            <axis xyz="0 0 1" rpy="0 0 0" />
+            <axis xyz="0 0 ${sign_lr}" rpy="0 0 0" />
             <parent link="base_link" />
             <child link="${lr}_${fb}_wheel_link" />
             <origin xyz="${sign_fb*(base_link_length/2-wheel_radius)}
                          ${sign_lr*base_link_width/2}
                          ${wheel_centre-wheel_radius}" 
-                    rpy="${H_PI/2} 0 0" /> 
+                    rpy="${-H_PI/2} 0 0" /> 
         </joint>
     </xacro:macro>
 
@@ -138,8 +138,10 @@
             </visual>
         </link>
 
-        <joint name="base_footprint_joint" type="fixed">
-            <origin xyz="0 0 ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 0" />
+         <joint name="base_footprint_joint" type="fixed">
+            <origin xyz="${base_link_length/2-wheel_radius} 
+                         0
+                         ${base_link_height/2+wheel_radius-wheel_centre}" rpy="0 0 0" />
             <parent link="base_footprint"/>
             <child link="base_link" />
         </joint>
