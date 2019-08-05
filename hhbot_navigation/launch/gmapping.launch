@@ -1,10 +1,10 @@
 <launch>
+    <arg name="odom_frame" default="odom" />
     <arg name="scan_topic" default="scan" />
 
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" clear_params="true">
-        <param name="odom_frame" value="odom"/>
+        <param name="odom_frame" value="$(arg odom_frame)"/>
         <param name="map_update_interval" value="5.0"/>
-        <!-- Set maxUrange < actual maximum range of the Laser -->
         <param name="maxRange" value="5.0"/>
         <param name="maxUrange" value="4.5"/>
         <param name="sigma" value="0.05"/>
