@@ -1,0 +1,25 @@
+<launch>
+
+    <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find hhbot_description)/urdf/hhbot_laser.xacro'" />
+
+    <!-- 使用实际时间 -->
+    <param name="/use_sim_time" value="false" />
+
+    <!-- 加载机器人URDF/Xacro模型 -->
+    <param name="robot_description" command="$(arg urdf_file)" />
+
+    <!-- 运行arbotix节点 -->
+    <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" output="screen" clear_params="true">
+        <rosparam file="$(find hhbot_bringup)/config/fake_hhbot_arbotix.yaml" command="load" />
+        <param name="sim" value="true"/>
+    </node>
+
+    <!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+     <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+        <param name="publish_frequency" type="double" value="20.0" />
+    </node>
+
+</launch>
