@@ -19,7 +19,7 @@
     </include>
 
     <!-- 加载机器人模型描述参数 -->
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find hhbot_gazebo)/urdf/hhbot.urdf.xacro'" /> 
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find hhbot_gazebo)/urdf/hhbot.xacro'" /> 
 
     <!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> 
