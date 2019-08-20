@@ -24,7 +24,7 @@ class MoveItFkDemo:
         arm.set_goal_joint_tolerance(0.001)
         gripper.set_goal_joint_tolerance(0.001)
         
-        # 设置机械臂的目标位置，规划组中的初始化位置
+        # 设置机械臂的目标位置为自定义位姿中的home
         arm.set_named_target('home')
 
         # 控制机械臂规划和运动期望位置
