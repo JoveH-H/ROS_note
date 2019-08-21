@@ -11,7 +11,7 @@ class MoveItFkDemo:
         # 初始化move_group的API
         moveit_commander.roscpp_initialize(sys.argv)
 
-        # 初始化ROS节点
+        # 初始化moveit_fk_demo节点
         rospy.init_node('moveit_fk_demo', anonymous=True)
  
         # 初始化需要使用move group控制的机械臂中的arm group
