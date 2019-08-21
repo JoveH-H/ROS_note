@@ -93,4 +93,3 @@ if __name__ == "__main__":
         MoveItIkDemo()
     except rospy.ROSInterruptException:
         pass
-
