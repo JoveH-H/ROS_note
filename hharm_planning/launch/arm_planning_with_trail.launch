@@ -1,0 +1,43 @@
+<launch>
+    <!-- 不使用仿真时间 -->
+    <param name="/use_sim_time" value="false" />
+
+    <!-- 启动 arbotix driver-->
+    <arg name="sim" default="true" />
+
+    <!-- 模型地址 -->
+    <arg name="model" default="$(find xacro)/xacro --inorder '$(find hharm_description)/urdf/hharm.xacro'" />
+
+    <!-- 加载模型 -->
+    <param name="robot_description" command="$(arg model)" />
+
+    <!-- 运行arm_controller节点 -->
+    <node name="arm_controller" pkg="arbotix_python" type="arbotix_driver" output="screen">
+        <rosparam file="$(find hharm_description)/config/arm.yaml" command="load" />
+        <param name="sim" value="true"/>
+    </node>
+
+    <!-- 运行gripper_controller节点 -->
+    <node name="gripper_controller" pkg="arbotix_controllers" type="gripper_controller">
+        <rosparam>
+            model: singlesided
+            invert: false
+            center: 0.0
+            pad_width: 0.004
+            finger_length: 0.08
+            min_opening: 0.0
+            max_opening: 0.06
+            joint: finger_joint1
+        </rosparam>
+    </node>
+
+    <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    
+    <!-- 运行move_group节点 -->
+    <include file="$(find hharm_moveit_config)/launch/move_group.launch" />
+
+    <!-- 启动rviz可视化界面 -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hharm_planning)/rviz/arm_paths.rviz" required="true" />
+
+</launch>
