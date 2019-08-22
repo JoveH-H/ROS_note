@@ -76,7 +76,7 @@ class MoveItCartesianDemo:
         
         # 设置第四个路点数据，回到初始位置，并加入路点列表
         if cartesian:
-            waypoints.append(deepcopy(start_pose))
+            waypoints.append(start_pose)
         else:
             arm.set_pose_target(start_pose)
             arm.go()
