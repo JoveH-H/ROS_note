@@ -45,7 +45,7 @@
     <disable_collisions link1="gripper_finger_link1" link2="link2" reason="Never" />
     <disable_collisions link1="gripper_finger_link1" link2="link6" reason="Adjacent" />
     <disable_collisions link1="gripper_finger_link2" link2="link2" reason="Never" />
-    <disable_collisions link1="gripper_finger_link2" link2="link4" reason="Never" />
+    <disable_collisions link1="gripper_finger_link1" link2="link5" reason="Default" />
     <disable_collisions link1="gripper_finger_link2" link2="link5" reason="Default" />
     <disable_collisions link1="gripper_finger_link2" link2="link6" reason="Adjacent" />
     <disable_collisions link1="link1" link2="link2" reason="Adjacent" />
