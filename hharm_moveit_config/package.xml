@@ -8,7 +8,7 @@
   <author email="964312262@qq.com">jvoe</author>
   <maintainer email="964312262@qq.com">jvoe</maintainer>
 
-  <license>BSD</license>
+  <license>GPLv3</license>
 
   <url type="website">http://moveit.ros.org/</url>
   <url type="bugtracker">https://github.com/ros-planning/moveit/issues</url>
