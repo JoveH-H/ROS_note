@@ -38,6 +38,6 @@ ROS_note 是CSDN博客专栏[《ROS笔记》](https://joveh-h.blog.csdn.net/cate
 > 胡春旭, ROS机器人开发实践, 机械工业出版社, 2018
 
 ## 版权和许可
-ROS_note 是在 [GNU General Public License v3.0 许可](https://github.com/JoveH-H/ROS_note/blob/master/LICENSE) 下提供的
+ROS_note 由 [GNU General Public License v3.0 许可](https://github.com/JoveH-H/ROS_note/blob/master/LICENSE) 提供
 
 谢谢!
