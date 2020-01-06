@@ -7,10 +7,10 @@
     <xacro:property name="rplidar_offset_x" value="0.05" />
     <xacro:property name="rplidar_offset_y" value="0" />
 
-    <!-- Body of hhobot -->
+    <!-- Body of hhbot -->
     <hhbot_body/>
 
-    <!-- laser of hhobot -->
+    <!-- laser of hhbot -->
     <joint name="rplidar_joint" type="fixed">
         <origin xyz="${rplidar_offset_x} ${rplidar_offset_y} ${base_link_height/2+0.02}"
                 rpy="0 0 0" />
