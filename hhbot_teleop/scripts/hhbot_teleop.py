@@ -5,7 +5,7 @@ from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
 msg = """
-Control mrobot!
+Control hhbot!
 ---------------------------
 Moving around:
    u    i    o
