@@ -3,7 +3,7 @@
 
     <xacro:include filename="$(find hhbot_description)/urdf/hhbot_body.urdf.xacro" />
 
-    <!-- Body of mrobot, with plates, standoffs -->
+    <!-- Body of hhbot -->
     <hhbot_body/>
 
 </robot>
