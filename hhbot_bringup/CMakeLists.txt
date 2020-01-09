@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   geometry_msgs
   tf
+  serial
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,9 +106,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   INCLUDE_DIRS include
-#  LIBRARIES mrobot_bringup
-#  CATKIN_DEPENDS roscpp rospy sensor_msgs
+#  INCLUDE_DIRS include
+  LIBRARIES hhbot_bringup
+  CATKIN_DEPENDS roscpp rospy sensor_msgs
 #  DEPENDS system_lib
 )
 
@@ -121,6 +122,9 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
 )
+
+add_executable(hhbot_bsp_serial_test src/hhbot_bsp_serial_test.cpp)
+target_link_libraries(hhbot_bsp_serial_test ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -150,7 +154,7 @@ include_directories(
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
-# )
+# )BSP serial init error
 
 
 #############
