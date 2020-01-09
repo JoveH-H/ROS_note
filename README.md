@@ -26,6 +26,8 @@ ROS_note 是CSDN博客专栏[《ROS笔记》](https://joveh-h.blog.csdn.net/cate
 
 > 因开发需要，运行版本降级到 Ubuntu版本 `[16.04 LTS]`
 
+> 添加内容：Xbox360手柄控制，串口配置测试
+
 ## 运行环境
 > Ubuntu版本 `[16.04 LTS]`
 
