@@ -20,10 +20,19 @@ ROS_note 是CSDN博客专栏[《ROS笔记》](https://joveh-h.blog.csdn.net/cate
 
 > 接下来会根据空余时间来安排更新博文和配套例程，讲述如何实际搭建ROS移动小车和机械臂，并发布v2.0版本。
 
-## 运行环境
-> Ubuntu版本 `[18.04 LTS]`
 
-> ROS版本 `[Melodic Morenia]`，安装参考博客[《ROS笔记（3） Melodic 的安装和配置》](https://joveh-h.blog.csdn.net/article/details/89736314)
+| 开发版本 | 发布模块 |
+| --- | --- |
+| `[v2.0]` | `[搭建真实机器人阶段所有配套例程文件]` |
+
+> 接下来会根据空余时间来安排更新博文和配套例程，讲述如何实际搭建ROS移动小车和机械臂。
+
+> 因开发需要，运行版本降级到 Ubuntu版本 `[16.04 LTS]`
+
+## 运行环境
+> Ubuntu版本 `[16.04 LTS]`
+
+> ROS版本 `[Melodic Kinetic]`，安装参考博客[《ROS笔记（2） Kinetic 的安装和配置》](https://joveh-h.blog.csdn.net/article/details/89710147)
 
 > 非常用的组件，在对应的博客中会提及且说明安装方式
 
