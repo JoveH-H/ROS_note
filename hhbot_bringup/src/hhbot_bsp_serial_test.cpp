@@ -1,6 +1,5 @@
 #include <ros/ros.h>
 #include <serial/serial.h> // ROS内置串口功能包
-#include "std_msgs/String.h"
 
 int main(int argc, char **argv)
 {
@@ -37,23 +36,19 @@ int main(int argc, char **argv)
         ROS_ERROR("End of BSP serial test");
         return -1;
     }
-
+    
     while (ros::ok())
     {
-        // 初始化std_msgs::String类型的消息
-        std_msgs::String msg;
-
         // 显示并发送串口数据
-        msg.data= "Hello HHbot BSP\r\n";
+        std::string send_data;
+        send_data = "Hello HHbot BSP\r\n";
         ROS_INFO("Send data: Hello HHbot BSP");
-
-        // 发送串口数据
-        ser.write(msg.data);
+        ser.write(send_data);
 
         // 接受并显示串口数据
-        msg.data = "";
-        ser.read(msg.data, ser.available());
-        ROS_INFO("Read data: %s",msg.data.c_str());
+        std::string read_data;
+        ser.read(read_data, ser.available());
+        ROS_INFO("Read data: %s", read_data.c_str());
 
         // 按照循环频率延时
         loop_rate.sleep();
