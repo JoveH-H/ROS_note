@@ -123,9 +123,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(hhbot_bsp_serial_test src/hhbot_bsp_serial_test.cpp)
-target_link_libraries(hhbot_bsp_serial_test ${catkin_LIBRARIES})
-
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/hhbot_bringup.cpp
