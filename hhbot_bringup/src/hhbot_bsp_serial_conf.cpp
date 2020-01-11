@@ -54,8 +54,8 @@ namespace hhbot_bsp
 
   bool HHbot::init()
   {
-    // 默认配置端口HHbot_bsp（已绑定），波特率115200，连接超时0.01秒
-    ser.setPort("/dev/HHbot_bsp");
+    // 默认配置端口hhbot_bsp（已绑定），波特率115200，连接超时0.01秒
+    ser.setPort("/dev/hhbot_bsp");
     ser.setBaudrate(115200);
     serial::Timeout to = serial::Timeout::simpleTimeout(10);
     ser.setTimeout(to);
