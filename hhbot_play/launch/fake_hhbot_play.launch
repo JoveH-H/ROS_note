@@ -1,0 +1,9 @@
+<launch>
+
+    <!-- 运行机身驱动 -->
+    <include file="$(find hhbot_bringup)/launch/fake_hhbot_bringup.launch" />
+
+    <!-- 运行导航驱动 -->
+    <include file="$(find hhbot_navigation)/launch/fake_nav_demo.launch" />
+
+</launch>
