@@ -4,8 +4,8 @@
 
 namespace hhbot_bsp
 {
-  const char header[2] = {55, 55};   // 帧头
-  const char ender[2] = {66, 66};    // 帧尾
+  const unsigned char header[2] = {0x88, 0x88};   // 帧头
+  const unsigned char ender[2] = {0x66, 0x66};    // 帧尾
   const double ROBOT_RADIUS = 0.300; // 车轮的半径
   const double ROBOT_LENGTH = 0.600; // 车轮的距离
   serial::Serial ser;                // 声明串口对象
@@ -55,7 +55,7 @@ namespace hhbot_bsp
   bool HHbot::init()
   {
     // 默认配置端口hhbot_bsp（已绑定），波特率115200，连接超时0.01秒
-    ser.setPort("/dev/hhbot_bsp");
+    ser.setPort("/dev/ttyUSB0");
     ser.setBaudrate(115200);
     serial::Timeout to = serial::Timeout::simpleTimeout(10);
     ser.setTimeout(to);
@@ -153,8 +153,8 @@ namespace hhbot_bsp
 
   void HHbot::writeSpeed(double RobotV, double YawRate)
   {
-    int i, length = 12;
-    char buf[12] = {0};
+    int i, length = 13;
+    unsigned char buf[13] = {0};
     double r = RobotV / YawRate;
     
     // 计算左右轮期望速度
@@ -178,19 +178,22 @@ namespace hhbot_bsp
     for (i = 0; i < 2; i++)
       buf[i] = header[i];
 
-    // 设置数据长度
+    // 设置数据
     for (i = 0; i < 4; i++)
     {
       buf[i + 2] = leftdata.data_char[i];
       buf[i + 6] = rightdata.data_char[i];
     }
 
+    // 转换校验
+    buf[10] = getCrc8(buf, length - 3);
+
     // 设置帧尾
     for (i = 0; i < 2; i++)
-      buf[10+i] = ender[i];
+      buf[11 + i] = ender[i];
 
     // 通过串口下发数据
-    ser.write(buf);
+    ser.write(buf, 13);
   }
 
   bool HHbot::spinOnce(double RobotV, double YawRate)
