@@ -12,8 +12,8 @@ import tf  # 导入tf模块 坐标转换
 
 leftdata, rightdata = 0.0, 0.0  # 车轮驱动发送数据
 vel_left, vel_right = 0.0, 0.0  # 车轮速度读取数据
-ROBOT_RADIUS = 0.300  # 车轮的半径
-ROBOT_LENGTH = 0.600  # 车轮的距离
+ROBOT_RADIUS = 0.025  # 车轮的半径
+ROBOT_LENGTH = 0.140  # 车轮的距离
 last_time_ = 0.0  # 计算使用的时间戳
 x_, y_, th_, vx_, vy_, vth_ = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  # 参数运算数值
 RobotV_, YawRate_ = 0.0, 0.0  # 读取运动控制数值

@@ -6,8 +6,8 @@ namespace hhbot_bsp
 {
   const unsigned char header[2] = {0x88, 0x88};   // 帧头
   const unsigned char ender[2] = {0x66, 0x66};    // 帧尾
-  const double ROBOT_RADIUS = 0.300; // 车轮的半径
-  const double ROBOT_LENGTH = 0.600; // 车轮的距离
+  const double ROBOT_RADIUS = 0.025; // 车轮的半径
+  const double ROBOT_LENGTH = 0.140; // 车轮的距离
   serial::Serial ser;                // 声明串口对象
   using namespace boost::asio;       // 定义一个命名空间，用于后面的读写操作
   boost::asio::io_service iosev;
