@@ -8,7 +8,7 @@
 
 ROS_note 是CSDN博客专栏[《ROS笔记》](https://joveh-h.blog.csdn.net/category_9290184.html)的例程代码库
 
-《ROS笔记》博客专栏收集了在学习书籍 [《ROS机器人开发实践》](http://www.guyuehome.com/1936) 过程中所收集和整理的笔记博客
+《ROS笔记》博客专栏收集了在学习ROS的过程中所收集和整理的笔记博客
 
 ## 版本
 
@@ -41,7 +41,7 @@ ROS_note 是CSDN博客专栏[《ROS笔记》](https://joveh-h.blog.csdn.net/cate
 
 ## 声明
 #### 个人声明
-> CSDN博客专栏《ROS笔记》基本讲述了ROS和如何搭建ROS仿真和真实的机器，希望能帮助学者加快入门的学习速度和效率
+> CSDN博客专栏《ROS笔记》基本讲述了ROS和如何搭建ROS仿真和真实的机器，希望能帮助学者加快入门ROS的速度和效率
 
 > 由于个人原因，近期不会再对CSDN博客专栏《ROS笔记》更新，因此也不会对该代码库更新
 
