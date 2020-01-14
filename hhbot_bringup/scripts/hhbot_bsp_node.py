@@ -107,16 +107,19 @@ def SerialRead(ser):
         # 检查信息头
         if (ord(data[0]) != data_FH or ord(data[1]) != data_FH):
             rospy.logerr("Received message header error!")
-
+            return 0
+        
         # 检查信息尾
         if (ord(data[data_LEN - 2]) != data_FT
                 or ord(data[data_LEN - 1]) != data_FT):
             rospy.logerr("Received message ender error!")
-
+            return 0
+        
         # 检查信息校验值
         if (ord(data[data_LEN - 3]) != getCrc8(data, data_LEN - 3)):
             rospy.logerr("Received data check sum error!")
-
+            return 0
+        
         # 获取数据
         vel_left = struct.unpack('<f', data[2:6])[0]
         vel_right = struct.unpack('<f', data[6:10])[0]
