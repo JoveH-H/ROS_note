@@ -1,0 +1,9 @@
+<launch>
+
+    <!-- 运行机身驱动 -->
+    <include file="$(find hhbot_bringup)/launch/hhbot_bringup_py.launch" />
+
+    <!-- 运行导航驱动 -->
+    <include file="$(find hhbot_navigation)/launch/nav_simple_demo.launch" />
+
+</launch>
