@@ -91,11 +91,14 @@ namespace hhbot_bsp
     unsigned char buf[13] = {0};
 
     // 读取缓存区长度
-    if (ser.available())  
+    if (ser.available() >= length)  
     {
       // 读取串口数据
       ser.read(buf, length);
-
+      
+      // 清空缓存区
+      ser.flushInput();
+      
       // 检查信息头
       if (buf[0] != header[0] || buf[1] != header[1])
       {
