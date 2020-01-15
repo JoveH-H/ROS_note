@@ -60,19 +60,19 @@ def SerialWrite(ser, RobotV, YawRate):
     """
     串口通信数据发送函数
     """
+    global ROBOT_LENGTH
     global leftdata, rightdata
 
     # 计算左右轮期望速度
     if RobotV == 0:
-        leftdata = -YawRate * ROBOT_RADIUS
-        rightdata = YawRate * ROBOT_RADIUS
+        leftdata = -YawRate * ROBOT_LENGTH / 2.0
+        rightdata = -leftdata
     elif YawRate == 0:
         leftdata = RobotV
         rightdata = RobotV
     else:
-        r = RobotV / YawRate
-        leftdata = YawRate * (r - ROBOT_RADIUS)
-        rightdata = YawRate * (r + ROBOT_RADIUS)
+        leftdata = RobotV - YawRate * ROBOT_LENGTH / 2.0
+        rightdata = RobotV + YawRate * ROBOT_LENGTH / 2.0
 
     # 显示读取速度数据
     rospy.loginfo("Send vel:%f,%f", leftdata, rightdata)
