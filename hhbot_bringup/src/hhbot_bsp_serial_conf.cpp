@@ -162,18 +162,18 @@ namespace hhbot_bsp
     // 计算左右轮期望速度
     if (RobotV == 0)
     {
-      leftdata.d = -YawRate * ROBOT_LENGTH / 2.0;
-      rightdata.d = -leftdata.d;
+      leftdata.data_float = -YawRate * ROBOT_LENGTH / 2.0;
+      rightdata.data_float = -leftdata.d;
     }
     else if (YawRate == 0)
     {
-      leftdata.d = RobotV;
-      rightdata.d = RobotV;
+      leftdata.data_float = RobotV;
+      rightdata.data_float = RobotV;
     }
     else
     {
-      leftdata.d = RobotV - YawRate * ROBOT_LENGTH / 2.0;
-      rightdata.d = RobotV + YawRate * ROBOT_LENGTH / 2.0;
+      leftdata.data_float = RobotV - YawRate * ROBOT_LENGTH / 2.0;
+      rightdata.data_float = RobotV + YawRate * ROBOT_LENGTH / 2.0;
     }
 
     // 设置帧头
