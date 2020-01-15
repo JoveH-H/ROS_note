@@ -158,23 +158,22 @@ namespace hhbot_bsp
   {
     int i, length = 13;
     unsigned char buf[13] = {0};
-    double r = RobotV / YawRate;
     
     // 计算左右轮期望速度
     if (RobotV == 0)
     {
-      leftdata.data_float = -YawRate * ROBOT_RADIUS;
-      rightdata.data_float = YawRate * ROBOT_RADIUS;
+      leftdata.d = -YawRate * ROBOT_LENGTH / 2.0;
+      rightdata.d = -leftdata.d;
     }
     else if (YawRate == 0)
     {
-      leftdata.data_float = RobotV;
-      rightdata.data_float = RobotV;
+      leftdata.d = RobotV;
+      rightdata.d = RobotV;
     }
     else
     {
-      leftdata.data_float = YawRate * (r - ROBOT_RADIUS);
-      rightdata.data_float = YawRate * (r + ROBOT_RADIUS);
+      leftdata.d = RobotV - YawRate * ROBOT_LENGTH / 2.0;
+      rightdata.d = RobotV + YawRate * ROBOT_LENGTH / 2.0;
     }
 
     // 设置帧头
