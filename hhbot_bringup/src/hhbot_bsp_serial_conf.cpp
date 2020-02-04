@@ -163,7 +163,7 @@ namespace hhbot_bsp
     if (RobotV == 0)
     {
       leftdata.data_float = -YawRate * ROBOT_LENGTH / 2.0;
-      rightdata.data_float = -leftdata.d;
+      rightdata.data_float = -leftdata.data_float;
     }
     else if (YawRate == 0)
     {
